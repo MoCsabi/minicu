@@ -1,28 +1,22 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "minicu"
 version = "0.1.0"
 authors = [
-{ name="Molnár Csaba"},
+    { name="Molnár Csaba" }
 ]
 description = "Könnyűsúlyú OS-szintű GUI automatizációs ágens Gemini Flash Lite használatával."
 readme = "README.md"
 requires-python = ">=3.10"
-classifiers = [
-"Programming Language :: Python :: 3"
-]
 dependencies = [
-"google-genai",
-"PyAutoGUI",
-"Pillow",
-"plyer"
+    "google-genai",
+    "PyAutoGUI",
+    "Pillow",
+    "plyer"
 ]
 
 [project.scripts]
-
 minicu = "minicu:main"
-[tool.setuptools]
-py-modules = ["minicu"]
