@@ -3,12 +3,14 @@ Saját computer use ágens kevesebb mint 50 sor kódból, ami "bármire képes"
 ## MiniCU akcióban - videó
 
 [https://youtu.be/WYNBIcJJeBw](https://youtu.be/WYNBIcJJeBw)  
-A videóban az ágens megír egy bash scriptet, majd a terminálban be is mutatja a használatát.
+A videóban az ágens megír egy bash scriptet, majd a terminálban be is mutatja a használatát.  
+[https://youtu.be/rwCfhS6SApQ](https://youtu.be/rwCfhS6SApQ)  
+A videóban az ágens letölti a discordot
 ## Absztrakt
 Pythonban fejlesztettem egy minimalista, a Gemini API-ra épülő computer use ágenst. A cél egy minimális, de működő megoldás létrehozása volt. A vezérlési ciklus egyszerű: az ágens kap egy képernyőképet és egy utasítást, a válaszában pedig nyers Python kódot ad vissza, amit egy `exec()` hívás végrehajt. A modell például a `pyautogui` könyvtárral kezelheti a gépet, de tetszőleges kódot is futtathat, így "bármire képes".
 ## Próbáld ki  
 >[!WARNING]  
->Semmiképp ne futtasd a saját gépeden! Csak olyan gépen futtasd, ahol azt sem bánnád, ha az egész rendszert letörölné! Az alábbi útmutató ebben segít.
+>Semmiképp ne futtasd a saját gépeden! Csak olyan gépen futtasd, ahol azt sem bánnád, ha az egész rendszert letörölné! Az alábbi útmutató ebben segít. Semmilyen felelősséget nem vállalok!
 
 A projekt elérhető a GitHub oldalamon: https://github.com/MoCsabi/minicu  
 A kipróbáláshoz a következő lépéseket ajánlom.
@@ -27,17 +29,17 @@ A kipróbáláshoz a következő lépéseket ajánlom.
 - ### SSH kapcsolat
     - Nyiss egy terminált a VPS-en, és írd be a következő parancsot:  
     >sudo systemctl start ssh.service
-    - Ez elindítja az SSH szervert a VPS-en. A címét a Circle Clientben, a `Hálózat` menüpontban találod.
-    - Csatlakozz SSH-n a VPS-hez (`ssh`, PuTTY stb.)! Figyelj arra, hogy a portnak is a `Hálózat` menüpontban megadottnak kell lennie!
-    - Ha minden jól ment, most már a VPS termináljában vagy, a Circle Clientben pedig látod a VPS képernyőjét.  
+    - Ez elindítja az SSH szervert a VPS-en. A címét a `Hálózat` menüpontban találod.
+    - Csatlakozz SSH-n a VPS-hez (`ssh`, PuTTY stb.)! Figyelj arra, hogy a portnak is a `Hálózat` menüpontban olvashatónak kell lennie!
+    - Ha minden jól ment, most már a VPS termináljában vagy, a Remote Desktopban pedig látod a VPS képernyőjét.  
 - ### API kulcs beszerzése
     - Látogass el a [Google AI Studio](https://aistudio.google.com/) oldalra, és jelentkezz be a Google fiókoddal.
     - Kattints a bal alsó sarokban, a fiókod mellett lévő kulcs ikonra, és másold ki a meglévő API kulcsot, vagy hozz létre egy újat! Ez teljesen ingyenes, de a használata korlátozott.
     - A VPS termináljában add meg a kulcsot környezeti változóként, hogy a program elérje:  
     >export GEMINI_API_KEY=IDE_ÍRD_BE_AZ_API_KULCSOT
-    - Ezután a program már tudja használni az API kulcsot.  
+    - Ezután a program már tudja használni az API kulcsot. Ez teljesen ingyenes, de amennyiben vannak fizetési adatok kötve a fiókodhoz ellenőrizd biztos a free tieren vagy-e!
 - ### Környezet előkészítése
-    - A minicu-t az SSH-n keresztül megnyitott terminálból fogjuk futtatni, így mindig látod, mit csinál, és szükség esetén le tudod állítani. A Circle Clientben pedig a VPS képernyőjén követheted az ágens műveleteit.
+    - A minicu-t az SSH-n keresztül megnyitott terminálból fogjuk futtatni, így mindig látod, mit csinál, és szükség esetén le tudod állítani. A Remote Desktopban pedig a VPS képernyőjén követheted az ágens műveleteit.
     - Futtasd a következő parancsot a VPS-en, hogy az ágens kezelni tudja a képernyőt:  
     >sudo apt install python3-tk python3-dev
     - Ezt pedig azért, hogy képernyőképet tudjon készíteni:  
@@ -89,6 +91,9 @@ A profi ágensek erre egy külön betanított, ún. "grounding modellt" használ
 A kattintási gyengeség egy nagyobb problémára világít rá: miért kell egyáltalán kattintania?  
 A feladatokat sokkal hatékonyabban megoldhatná programkóddal, rendszerparancsokkal vagy billentyűkombinációkkal. Ez utóbbi nem is rossz ötlet, mivel a legtöbb alkalmazás támogatja az akadálymentesítési funkciókat, és többnyire kattintás nélkül is használható. Bele is írtam a promptba, hogy ezeket a megoldásokat részesítse előnyben.  
 Szerintem ebből egy általánosabb tanulság is levonható: miért kell a computer use ágenseknek kattintgatniuk? Persze az a cél, hogy felhasználói szinten tudjanak bánni az operációs rendszerrel, de szerintem ehhez csak végszükség esetén kellene folyamodniuk.
+### Arbitrary code execution
+Bár szerintem nagyon találékony megoldás egy `exec()` blokkal teljhatalmat adni az ágensnek az OS felett mondanom sem kell hogy a "profik" nem így csinálják.  
+A leggyakoribb megoldás a `tool-calling`, ahol bizonyos eszközöket adsz az AI-nak. Ez lehet klikkelés (x,y) pontra, gépelés vagy rendszerhívás. Így sokkal biztonságosabbá tehető a végrehajtás, és persze ez nem zárja ki hogy kódot hajtson végre, csak mondjuk a felhasználó engedélyével.
 ### Ingyenes API kulcs
 Az ingyenes API kulcs használata két hátránnyal jár:  
 - Egyrészt szigorúak a korlátok, így tényleg csak proof of conceptre alkalmas. Ennél is zavaróbb, hogy nem élvezünk prioritást, így amikor terheltek a szerverek, nagyon lassan érkezik a válasz.
