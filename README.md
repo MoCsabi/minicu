@@ -3,7 +3,7 @@ Saját Computer Use ágens kevesebb mint 50 sor kódból, ami "bármire képes"
 ## Absztrakt
 Fejlesztettem egy gemini api-t használó minimalista computer use ágenset pythonban. A cél egy minimális működő megoldás létrehozása volt. A kontrol loop úgy épül fel, hogy az ágens kap egy képernyőfotót és egy utasítást, majd a válaszában megad nyers python kódot amit egy exec() blokkban végrehajtódik. A modell használhatja például a pyautogui könyvtárat a géppel való interaktáláshoz, de képes tetszőleges kód végrehajtására, így "bármire képes".
 ## Próbáld ki
->[!WARNING] Warning
+>[!WARNING]
 >Semmiképp ne futtasd a saját gépeden! Csakis olyan gépen futtasd ahol azt se bánnád ha az egész rendszert törölné! A következő útmutató ehhez fog segédletet nyújtani
 
 Elérhetővé tettem a projektet a GitHub oldalamon: https://github.com/MoCsabi/minicu  
