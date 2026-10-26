@@ -9,7 +9,6 @@ authors = [
     { name="Molnár Csaba" }
 ]
 description = "Könnyűsúlyú OS-szintű GUI automatizációs ágens Gemini Flash Lite használatával."
-readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "google-genai",
