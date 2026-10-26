@@ -24,3 +24,5 @@ dependencies = [
 [project.scripts]
 
 minicu = "minicu:main"
+[tool.setuptools]
+py-modules = ["minicu"]
