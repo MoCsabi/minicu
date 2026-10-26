@@ -1,5 +1,8 @@
 # MiniCU - A stupid(ly) simple computer use agent
 Saját Computer Use ágens kevesebb mint 50 sor kódból, ami "bármire képes"
+## MiniCU akcióban - video
+https://youtu.be/WYNBIcJJeBw  
+A videóban az ágens ír egy bash scriptet majd demonstrálja a terminálban a használatát.
 ## Absztrakt
 Fejlesztettem egy gemini api-t használó minimalista computer use ágenset pythonban. A cél egy minimális működő megoldás létrehozása volt. A kontrol loop úgy épül fel, hogy az ágens kap egy képernyőfotót és egy utasítást, majd a válaszában megad nyers python kódot amit egy exec() blokkban végrehajtódik. A modell használhatja például a pyautogui könyvtárat a géppel való interaktáláshoz, de képes tetszőleges kód végrehajtására, így "bármire képes".
 ## Próbáld ki
@@ -88,9 +91,11 @@ Az, hogy ingyenes API kulcsot használunk a modellhez két hátránnyal jár:
 - Egyrészt durva limitek vannak, így tényleg csak egy proof of concept megoldásra jó, de inkább az a zavaró, hogy így nem élvezünk prioritást, amikor terheltek a szerverek nagyon lassan érkezik válasz.
 - Másrészt az ingyenes kulcs használattak együtt jár hogy az adataid (jelen esetben képernyőképek a gépről) egyenesen vissza mennek a Google-nek, akár emberek is megtekinthetik manual review-re.
 ## Reflekció
-A célom ezzel a projekttel enm az volt, hogy egy "jó" computer use ágenset fejlesszek, amit mások használnának. Nem is gondolom, hogy ezt elértem. Rengeteg megoldatlan probléma maradt. A cél az volt hogy tanuljak, és minél egyszerűbb megoldást találjak, amit szerintem el is értem. A fejlesztett verzió megtalálható a https://github.com/MoCsabi/minicu linken. A forráskód továbbra is 50 sor kód alatt van!
+A célom ezzel a projekttel enm az volt, hogy egy "jó" computer use ágenset fejlesszek, amit mások használnának. Nem is gondolom, hogy ezt elértem, rengeteg megoldatlan probléma maradt. A cél az volt hogy tanuljak, és minél egyszerűbb megoldást találjak, amit el is értem. A fejlesztett verzió megtalálható a https://github.com/MoCsabi/minicu linken. A forráskód továbbra is 50 sor kód alatt van!
 ### Tesztek
 A fejlesztés során rengeteget teszteltem. Ez a lezáró fejezet összegyűjti a legérdekesebb dolgokat amiket csinált.  
 - Egyszer átírta a saját forráskódját (feltehetőleg véletlenül) majd kiadta a git revert utasítást hogy sikeresen visszaállítsa
 - Sokszor bezárta a saját terminálját
 - Sikerült discordon ráírnia a barátomra (csak 2 másik emberre írt rá előtte)
+- Sikerült rávenni hogy "hackelje meg" (lépjen be ssh-n) egy barátom gépére majd keresse meg a legnagyobb filet a gépén
+- Egyszer látszólag nem csinált semmit majd amikor visszaváltottam hogy lássam a terminált éppen pip-pel töltött le egy könyvtárat
