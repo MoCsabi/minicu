@@ -18,4 +18,4 @@ dependencies = [
 ]
 
 [project.scripts]
-minicu = "minicu:main"
+minicu = "minicu.minicu:main"
